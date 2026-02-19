@@ -1,6 +1,6 @@
 {
   "name": "apps-ekosystem",
-  "description": "Monorepo hosting Kalisio applications"
+  "description": "Monorepo hosting Kalisio applications",
   "type": "module",
   "packageManager": "pnpm@10.1.0",
   "standard": {
