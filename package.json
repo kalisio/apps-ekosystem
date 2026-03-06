@@ -22,10 +22,10 @@
     ]
   },
   "scripts": {
+    "dev:teams": "pnpm --filter @kalisio/teams-api dev",
     "prepare": "husky",
     "lint": "standard 'packages/**/*.js' --fix",
     "test": "vitest run --coverage",
-    "build": "",
     "changeset": "changeset",
     "changeset:status": "changeset status",
     "changeset:version": "changeset version",

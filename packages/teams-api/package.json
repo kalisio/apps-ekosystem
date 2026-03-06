@@ -14,7 +14,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build"
+    "dev": "node --watch src/index.js"
   },
   "keywords": [
     "teams",
