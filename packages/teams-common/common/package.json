@@ -1,0 +1,40 @@
+{
+  "name": "@kalisio/teams-common",
+  "description": "Organization management app (common package)",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "development": "./src/index.js",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "keywords": [
+    "teams",
+    "kalisio"
+  ],
+  "author": {
+    "name": "KALISIO <contact@kalisio.com>",
+    "url": "https://github.com/kalisio"
+  },
+  "contributors": [],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kalisio/apps-ekosystem.git",
+    "directory": "packages/teams"
+  },
+  "bugs": {
+    "url": "https://github.com/kalisio/apps-ekosystem/issues"
+  },
+  "homepage": "https://github.com/kalisio/apps-ekosystem/tree/main/packages/teams-common",
+  "dependencies": {},
+  "devDependencies": {}
+}

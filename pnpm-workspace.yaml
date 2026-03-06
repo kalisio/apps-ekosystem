@@ -18,6 +18,7 @@ catalog:
   "@feathersjs/rest-client": ^5.0.8
   "@feathersjs/socketio": ^5.0.8
   "@feathersjs/socketio-client": ^5.0.8
+  "@kalisio/kdk": ^2.6.4
   "@logtape/logtape": ^0.7.0
   "@quasar/app-vite": ^2.4.1
   "@quasar/extras": ^1.16.15
