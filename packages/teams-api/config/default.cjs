@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const winston = require('winston')
-const express = require('@feathersjs/express')
+// const express = require('@feathersjs/express')
 const isDocker = require('is-docker')
 
 const SERVER_PORT = process.env.PORT || 8081
@@ -41,6 +41,8 @@ module.exports = {
     default: 12,
     max: 50
   },
+  // Uncomment the following bloc to enable distribution
+  /*
   distribution: {
     services: (service) => false,
     remoteServices: (service) => false,
@@ -53,6 +55,7 @@ module.exports = {
     distributedMethods: ['find', 'get', 'create', 'update', 'patch', 'remove'],
     distributedEvents: ['created', 'updated', 'patched', 'removed']
   },
+  */
   authentication: {
     secret: process.env.APP_SECRET,
     appId: process.env.APP_ID,
@@ -132,7 +135,7 @@ module.exports = {
   },
   db: {
     adapter: 'mongodb',
-    url: process.env.DB_URL || (isDocker ? 'mongodb://mongodb:27017/teams' : 'mongodb://127.0.0.1:27017/teams')
+    url: process.env.DB_URL || (isDocker() ? 'mongodb://mongodb:27017/teams' : 'mongodb://127.0.0.1:27017/teams')
   }
   // Declare the required services here
 }

@@ -3,18 +3,9 @@
   "description": "Organization management app (common package)",
   "version": "0.0.0",
   "type": "module",
-  "exports": {
-    ".": {
-      "development": "./src/index.js",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "files": [
-    "dist"
-  ],
+  "exports": "./src/index.js",
   "scripts": {
-    "build": "vite build"
+    "test": "vitest run --coverage"
   },
   "keywords": [
     "teams",

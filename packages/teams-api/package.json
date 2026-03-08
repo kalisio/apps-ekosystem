@@ -14,7 +14,8 @@
     "dist"
   ],
   "scripts": {
-    "dev": "node --watch src/index.js"
+    "dev": "node --watch src/index.js",
+    "test": "vitest run --coverage"
   },
   "keywords": [
     "teams",
@@ -36,8 +37,16 @@
   },
   "homepage": "https://github.com/kalisio/apps-ekosystem/tree/main/packages/teams-api",
   "dependencies": {
+    "@feathersjs/authentication": "catalog:",
+    "@feathersjs/express": "catalog:",
+    "@kalisio/feathers-distributed": "catalog:",
+    "@kalisio/kdk": "catalog:",
     "@kalisio/teams-common": "workspace:*",
-    "is-docker": "catalog:"
+    "debug": "catalog:",
+    "feathers-hooks-common": "catalog:",
+    "is-docker": "catalog:",
+    "lodash": "catalog:",
+    "winston": "catalog:"
   },
   "devDependencies": {}
 }

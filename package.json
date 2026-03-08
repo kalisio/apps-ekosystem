@@ -22,14 +22,16 @@
     ]
   },
   "scripts": {
-    "dev:teams": "pnpm --filter @kalisio/teams-api dev",
-    "prepare": "husky",
-    "lint": "standard 'packages/**/*.js' --fix",
-    "test": "vitest run --coverage",
     "changeset": "changeset",
     "changeset:status": "changeset status",
     "changeset:version": "changeset version",
-    "changeset:release": "pnpm build && changeset publish"
+    "changeset:release": "pnpm build && changeset publish",
+    "lint": "standard 'packages/**/*.js' --fix",
+    "prepare": "husky",
+    "test": "vitest run --coverage",
+    "test:teams:common": "pnpm --filter @kalisio/teams-common test",
+    "test:teams:api": "pnpm --filter @kalisio/teams-api test",
+    "test:teams:ui": "pnpm --filter @kalisio/teams-ui test"
   },
   "keywords": [
     "kalisio"
@@ -71,7 +73,8 @@
   },
   "pnpm": {
     "overrides": {
-      "@kalisio/meta-ekosystem": "link:../meta-ekosystem"
+      "@kalisio/meta-ekosystem": "link:../meta-ekosystem",
+      "ejs": "^3.1.10"
     }
   }
 }
