@@ -15,10 +15,16 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       all: true,
+      clean: true,
       include: ['src/**/*.js'],
-      exclude: ['**/*.test.js', 'node_modules/**', 'dist/**'],
+      exclude: [
+        'node_modules/**',
+        'dist/**',
+        'test/**',
+        '*.config.js'
+      ],
       reporter: ['text', 'html', 'lcov'],
-      reportsDirectory: path.join(__dirname, '../../coverage/teams-api')
+      reportsDirectory: '../../coverage/teams-api'
     }
   }
 })

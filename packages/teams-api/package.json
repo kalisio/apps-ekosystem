@@ -14,8 +14,11 @@
     "dist"
   ],
   "scripts": {
+    "build": "vite build",
     "dev": "node --watch src/index.js",
-    "test": "vitest run --coverage"
+    "lint": "standard --fix",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "teams",

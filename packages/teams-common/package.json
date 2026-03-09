@@ -5,7 +5,10 @@
   "type": "module",
   "exports": "./src/index.js",
   "scripts": {
-    "test": "vitest run --coverage"
+    "build": "vite build",
+    "lint": "standard --fix",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "teams",
