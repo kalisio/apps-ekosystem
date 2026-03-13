@@ -78,7 +78,6 @@
   },
   "pnpm": {
     "overrides": {
-      "@kalisio/meta-ekosystem": "link:../meta-ekosystem",
       "ejs": "^3.1.10"
     }
   }
