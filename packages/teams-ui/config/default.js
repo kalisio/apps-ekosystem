@@ -1,23 +1,15 @@
-const leftPane = require('./kdk/panes.left')
-
+import pkg from '../package.json' assert { type: 'json' }
+import routes from '../src/router/routes.js'
 // Helper declaration
 const APP_SLUG = 'teams'
 const API_PATH = '/api'
 
-const LEFT_PANE = {
-  content: [
-    leftPane.activityLink({ name: 'activity', icon: 'las la-smile', label: 'Activity.LABEL' }),
-    leftPane.logout()
-  ],
-  opener: true
-}
-
-module.exports = {
+export default {
   appName: 'Kalisio teams',
   appSlug: APP_SLUG,
   buildMode: process.env.BUILD_MODE === 'pwa' ? 'pwa' : 'spa',
   flavor: process.env.NODE_APP_INSTANCE || 'dev',
-  version: require('../package.json').version,
+  version: pkg.version,
   buildNumber: process.env.BUILD_NUMBER,
   apiPath: API_PATH,
   apiJwt: `${APP_SLUG}-jwt`,
@@ -78,9 +70,6 @@ module.exports = {
     }
   },
   homeActivity: {
-    panes: {
-      left: LEFT_PANE
-    }
   },
-  routes: require('../src/router/routes')
+  routes
 }

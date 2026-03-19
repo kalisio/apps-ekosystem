@@ -2,20 +2,19 @@
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
 import { defineConfig } from '#q-app/wrappers'
-import { fileURLToPath } from 'url'
-import { dirname, resolve } from 'path'
+import { fileURLToPath } from 'node:url'
 import path from 'path'
 import fs from 'fs'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const serverPort = process.env.PORT || process.env.HTTPS_PORT || 8081
 const clientPort = process.env.CLIENT_PORT || process.env.HTTPS_CLIENT_PORT || 8080
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
 // Load config based on current NODE_ENV, etc.
-// import clientConfig from 'config'
-// // Write JSON config
-// fs.writeFileSync(path.join('config', 'client-config.json'), JSON.stringify(clientConfig))
+import clientConfig from 'config'
+// Write JSON config
+fs.writeFileSync(path.join('config', 'client-config.json'), JSON.stringify(clientConfig))
 
 export default defineConfig((/* ctx */) => {
   return {
@@ -27,7 +26,6 @@ export default defineConfig((/* ctx */) => {
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
       'kdk',
-      'tour'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
@@ -42,13 +40,6 @@ export default defineConfig((/* ctx */) => {
       'line-awesome',
       'fontawesome-v5'
     ],
-
-    // https://quasar.dev/quasar-cli-webpack/quasar-config-js#property-htmlvariables
-    // htmlVariables: {
-    //   appName: clientConfig.appName,
-    //   appSlug: 'crisis',
-    //   appDescription: 'Monitor real-time events on the field'
-    // },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#build
     build: {
@@ -74,14 +65,50 @@ export default defineConfig((/* ctx */) => {
       // distDir
 
       extendViteConf (viteConf) {
-        viteConf.resolve = viteConf.resolve || {}
-        viteConf.resolve.alias = {
-          ...viteConf.resolve.alias,
-          src: resolve(__dirname, 'src'),
-          // app: resolve(__dirname, 'src'),
-          path: 'path-browserify'
+        // plugins
+        viteConf.plugins = viteConf.plugins || []
+        // viteConf.plugins.push(nodePolyfills())
+
+        // alias
+        
+        viteConf.resolve = {
+          ...viteConf.resolve,
+          alias: {
+            ...viteConf.resolve.alias,
+            
+            '@components': [
+              path.resolve(__dirname, 'src/components'),
+              path.resolve(__dirname, 'node_modules/@kalisio/kdk/core/client/components')
+            ],
+            '@schemas': [
+              path.resolve(__dirname, 'src/schemas'),
+              path.resolve(__dirname, 'node_modules/@kalisio/kdk/core/common/schemas')
+            ],
+            '@i18n': [
+              path.resolve(__dirname, 'src/i18n'),
+              path.resolve(__dirname, 'node_modules/@kalisio/kdk/core/client/i18n'),
+              path.resolve(__dirname, 'node_modules/@kalisio/kdk/map/client/i18n')
+            ],
+            config: path.resolve(__dirname, 'config/client-config.json'),
+            // jsts: path.resolve(__dirname, 'src/assets/kdk/jsts.min.js'),
+
+            // polyfills
+            // assert: 'assert',
+            // crypto: 'crypto-browserify',
+            // http: 'stream-http',
+            // https: 'https-browserify',
+            // path: 'path-browserify',
+            // stream: 'stream-browserify',
+            // timers: 'timers-browserify',
+            // zlib: 'browserify-zlib'
+          }
         }
-        viteConf.resolve.preserveSymlinks = true
+
+        // minify
+        // viteConf.build = {
+        //   ...viteConf.build,
+        //   minify: process.env.DEBUG ? false : 'esbuild'
+        // }
       },
       // viteVuePluginOptions: {},
       
@@ -97,7 +124,26 @@ export default defineConfig((/* ctx */) => {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#devserver
     devServer: {
-      // https: true,
+      port: clientPort,
+      proxy: {
+        '/api': {
+          target: 'http://localhost:' + serverPort,
+          changeOrigin: true,
+          logLevel: 'debug'
+        },
+        '/apiws': {
+          target: 'http://localhost:' + serverPort,
+          changeOrigin: true,
+          ws: true,
+          logLevel: 'debug'
+        },
+        // The auth endpoints are not easy to prefix so we manage it manually
+        '/oauth': {
+          target: 'http://localhost:' + serverPort,
+          changeOrigin: true,
+          logLevel: 'debug'
+        }
+      },
       open: true // opens browser window automatically
     },
 
@@ -112,16 +158,81 @@ export default defineConfig((/* ctx */) => {
       // (like functional components as one of the examples),
       // you can manually specify Quasar components/directives to be available everywhere:
       //
-      // components: [],
-      // directives: [],
+      components: [
+        'QAjaxBar',
+        'QAvatar',
+        'QBadge',
+        'QBtn',
+        'QCard',
+        'QCardSection',
+        'QCardActions',
+        'QCheckbox',
+        'QChip',
+        'QDate',
+        'QDialog',
+        'QDrawer',
+        'QExpansionItem',
+        'QFab',
+        'QFabAction',
+        'QField',
+        'QFooter',
+        'QHeader',
+        'QIcon',
+        'QImg',
+        'QInput',
+        'QItem',
+        'QItemSection',
+        'QItemLabel',
+        'QLayout',
+        'QList',
+        'QMarkupTable',
+        'QMenu',
+        'QPage',
+        'QPageContainer',
+        'QPageSticky',
+        'QPagination',
+        'QPopupProxy',
+        'QResizeObserver',
+        'QRouteTab',
+        'QScrollArea',
+        'QSelect',
+        'QSeparator',
+        'QSpace',
+        'QTab',
+        'QTabPanel',
+        'QTabPanels',
+        'QTabs',
+        'QTime',
+        'QTimeline',
+        'QTimelineEntry',
+        'QToolbar',
+        'QToolbarTitle',
+        'QToggle',
+        'QTooltip'
+      ],
+      directives: [
+        'ClosePopup',
+        'Ripple',
+        'TouchSwipe',
+        'TouchPan'
+      ],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Notify',
+        'Dialog',
+        'Platform',
+        'Loading',
+        'AppFullscreen'
+      ]
     },
 
     // animations: 'all', // --- includes all animations
     // https://v2.quasar.dev/options/animations
-    animations: [],
+    animations: [
+      'fadeIn',
+      'fadeOut'
+    ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#sourcefiles
     // sourceFiles: {
@@ -214,7 +325,7 @@ export default defineConfig((/* ctx */) => {
       builder: {
         // https://www.electron.build/configuration
 
-        appId: 'toto-project'
+        appId: 'quasar-project'
       }
     },
 
