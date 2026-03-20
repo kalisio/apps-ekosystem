@@ -32,9 +32,12 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@kalisio/kdk": "catalog:",
     "@kalisio/feathers-localforage": "catalog:",
+    "@kalisio/kdk": "catalog:",
     "@quasar/extras": "catalog:",
+    "@thumbmarkjs/thumbmarkjs": "catalog:",
+    "ajv": "catalog:",
+    "ajv-i18n": "catalog:",
     "config": "catalog:",
     "feathers-reactive": "catalog:",
     "jwt-decode": "catalog:",
@@ -42,20 +45,21 @@
     "path-browserify": "catalog:",
     "quasar": "catalog:",
     "vue": "catalog:",
+    "vue-i18n": "catalog:",
     "vue-router": "catalog:"
   },
   "devDependencies": {
     "@eslint/js": "^9.14.0",
+    "@quasar/app-vite": "catalog:",
+    "@vue/eslint-config-prettier": "^10.1.0",
+    "autoprefixer": "^10.4.2",
     "eslint": "^9.14.0",
     "eslint-plugin-vue": "^10.4.0",
     "globals": "^16.4.0",
-    "vite-plugin-checker": "^0.11.0",
-    "vue-eslint-parser": "^10.2.0",
-    "@vue/eslint-config-prettier": "^10.1.0",
+    "postcss": "^8.4.14",
     "prettier": "^3.8.1",
-    "@quasar/app-vite": "catalog:",
-    "autoprefixer": "^10.4.2",
-    "postcss": "^8.4.14"
+    "vite-plugin-checker": "^0.11.0",
+    "vue-eslint-parser": "^10.2.0"
   },
   "engines": {
     "node": "^28 || ^26 || ^24 || ^22 || ^20",
